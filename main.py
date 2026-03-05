@@ -135,3 +135,32 @@ class ProductScraper:
             self.log(f"Request Error P{page} (JSON): {str(e)}", 'ERR')
 
             return None
+
+if __name__ == "__main__":
+    scraper = ProductScraper()
+    
+    print("🚀 Product scraper started...", flush=True)
+
+    while True:
+        try:
+            # You can increase pages if needed
+            for page in range(1, 5):
+                print(f"Scanning page {page}...", flush=True)
+
+                data = scraper.fetch_json(page)
+
+                if data:
+                    products = scraper.parse_json_products(data)
+                    print(f"✅ Page {page}: Found {len(products)} products", flush=True)
+                else:
+                    print(f"⚠️ No data received for page {page}", flush=True)
+
+                time.sleep(2)  # small delay to avoid rate limit
+
+            print("🔁 Scan cycle complete. Waiting before next scan...", flush=True)
+            time.sleep(10)
+
+        except Exception as e:
+            print(f"❌ Error occurred: {e}", flush=True)
+            time.sleep(5)
+

@@ -14,7 +14,7 @@ class ProductScraper:
         
     def get_json_url(self, page: int) -> str:
         """Placeholder for your URL generation logic."""
-        return f"https://www.firstcry.com/api/products?page={page}"
+        return f"https://www.firstcry.com/svcs/SearchResult.svc/GetSearchResultProductsPaging?PageNo=1&PageSize=20&SortExpression=popularity&OnSale=5&SearchString=brand&SubCatId=&BrandId=&Price=&Age=&Color=&OptionalFilter=&OutOfStock=&Type1=&Type2=&Type3=&Type4=&Type5=&Type6=&Type7=&Type8=&Type9=&Type10=&Type11=&Type12=&Type13=&Type14=&Type15=&combo=&discount=&searchwithincat=&ProductidQstr=&searchrank=&pmonths=&cgen=&PriceQstr=&DiscountQstr=&sorting=&MasterBrand=113&Rating=&Offer=&skills=&material=&curatedcollections=&measurement=&gender=&exclude=&premium=&pcode=380008&isclub=0&deliverytype=&author=&booktype=&character=&collection=&format=&genre=&booklanguage=&publication=&skill="
 
     def slugify(self, text: str) -> str:
         if not text:
@@ -133,4 +133,5 @@ class ProductScraper:
             
         except requests.exceptions.RequestException as e:
             self.log(f"Request Error P{page} (JSON): {str(e)}", 'ERR')
+
             return None
